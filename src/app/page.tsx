@@ -1,14 +1,14 @@
 "use client";
 
-import store from "@/store/store";
 import AlbumPage from "./album/page";
 import { Provider } from "react-redux";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const HomePage = () => {
   return (
-    <Provider store={store}>
+    <ChakraProvider>
       <AlbumPage />
-    </Provider>
+    </ChakraProvider>
   );
 };
 export default HomePage;

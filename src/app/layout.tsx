@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { FC } from "react";
 import "@/assets/styles/globals.css";
+import StoreProvider from "../../providers/StoreProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
   title: "Albums",
@@ -14,13 +16,17 @@ type RootLayoutProps = {
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   return (
-    <html lang="en">
-      <body>
-        <section>
-          <div>{children}</div>
-        </section>
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body>
+          <ChakraProvider>
+            <section>
+              <div>{children}</div>
+            </section>
+          </ChakraProvider>
+        </body>
+      </html>
+    </StoreProvider>
   );
 };
 
