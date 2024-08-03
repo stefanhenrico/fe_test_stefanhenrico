@@ -1,53 +1,28 @@
 "use client";
 
-import { useGetPhotosByAlbumIdQuery } from "@/store/slices/photosApiSlice";
 import { FC } from "react";
-import Loader from "../common/Loader/Loader";
-import { Card, CardBody, Heading, Image, Text, Stack } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { Card, CardBody, Heading, Image, Stack } from "@chakra-ui/react";
 
 type AlbumProps = {
-  userId: number;
-  id: number;
   title: string;
+  thumbnailUrl?: string;
+  onClick?: () => void | undefined;
 };
 
-const Album: FC<AlbumProps> = ({ userId, id, title }) => {
-  const router = useRouter();
-  const { data, error, isLoading } = useGetPhotosByAlbumIdQuery(id);
-
-  const handleNavigate = () => {
-    console.log("navigate to user: ", userId);
-    router.push(`/users/${userId}`);
-  };
-
-  if (isLoading) {
-    return <Loader size={20} />;
-  }
-
-  if (!data || error) {
-    return <>error goes here</>;
-  }
-
-  const { title: photoTitle, thumbnailUrl } = data[0];
-
+const Album: FC<AlbumProps> = ({ title, thumbnailUrl, onClick }) => {
   return (
-    <Card maxW="sm" onClick={() => handleNavigate()} cursor="pointer">
+    <Card maxW="sm" onClick={onClick} cursor={onClick ? "pointer" : "default"}>
       <CardBody>
         <Image
           alt={title}
           objectFit="cover"
-          src={thumbnailUrl}
+          src={thumbnailUrl ? thumbnailUrl.replace("150", "200") : ""}
           borderRadius={4}
           mx="auto"
+          sizes="200px"
         />
-        <Stack mt="2">
-          <Heading my="2" size="sm">
-            {title}
-          </Heading>
-          <Text my="2" fontSize="small">
-            {photoTitle}
-          </Text>
+        <Stack mt="4">
+          <Heading size="sm">{title}</Heading>
         </Stack>
       </CardBody>
     </Card>

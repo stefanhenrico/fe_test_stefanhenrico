@@ -11,13 +11,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
-    getUserAlbums: builder.query<AlbumType[], string>({
-      query: (userId: string) => ({
-        url: `${USERS_URL}/${userId}${ALBUMS_URL}`,
-      }),
-      keepUnusedDataFor: 5,
-    }),
   }),
 });
 
-export const { useGetUserDetailsQuery, useGetUserAlbumsQuery } = usersApiSlice;
+export const { useGetUserDetailsQuery } = usersApiSlice;

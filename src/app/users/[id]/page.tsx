@@ -2,60 +2,68 @@
 
 import Album from "@/components/Album/Album";
 import Loader from "@/components/common/Loader/Loader";
-import {
-  useGetUserAlbumsQuery,
-  useGetUserDetailsQuery,
-} from "@/store/slices/userApliSlice";
+import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
+import { useGetUserDetailsQuery } from "@/store/slices/userApliSlice";
 import { AlbumType } from "@/types/album";
 import {
+  Box,
   Card,
   CardBody,
-  Container,
   Heading,
   SimpleGrid,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 
 const UserPage = ({ params }: { params: { id: string } }) => {
   const { id: userId } = params;
-  const { data, error, isLoading } = useGetUserDetailsQuery(userId);
 
   const {
-    data: albumsData,
-    error: albumsError,
-    isLoading: albumsIsLoading,
-  } = useGetUserAlbumsQuery(userId);
+    data: userData,
+    error: userError,
+    isLoading: userLoading,
+  } = useGetUserDetailsQuery(userId);
 
-  if (isLoading) {
+  const { albums, albumsError, albumsLoading, photosError, photosLoading } =
+    useAlbumsWithThumbnails();
+
+  if (userLoading || albumsLoading || photosLoading) {
     return <Loader />;
   }
 
-  if (!data || error) {
+  if (!userData || userError || !albums || albumsError || photosError) {
     return <>error goes here</>;
   }
 
-  const { name, website, company, email, phone } = data;
+  const { name, website, company, email, phone } = userData;
   const { name: companyName, bs, catchPhrase } = company;
+  const userAlbums = albums.filter((album) => album.userId === userData.id);
 
   return (
-    <SimpleGrid minChildWidth="300px" spacing="40px">
-      <Card>
-        <CardBody>
-          <Heading size="lg">{name}</Heading>
-          <Heading size="md">{companyName}</Heading>
-          <Text fontSize="md">{website}</Text>
-          <Text fontSize="md">{bs}</Text>
-          <Text fontSize="md">{catchPhrase}</Text>
-          <Text fontSize="md">{email}</Text>
-          <Text fontSize="md">{phone}</Text>
-        </CardBody>
-      </Card>
-      {albumsData &&
-        albumsData.map((item: AlbumType) => {
+    <>
+      <Box>
+        <Card boxShadow="none">
+          <CardBody>
+            <Heading size="lg">{name}</Heading>
+
+            <Text fontSize="sm">{email}</Text>
+            <Text fontSize="sm">{phone}</Text>
+            <Text fontSize="sm">{website}</Text>
+
+            <Heading size="xs" mt={4} textTransform="uppercase">
+              Company details:
+            </Heading>
+            <Heading size="md">{companyName}</Heading>
+            <Text fontSize="sm">- {catchPhrase}</Text>
+            <Text fontSize="sm">- {bs}</Text>
+          </CardBody>
+        </Card>
+      </Box>
+      <SimpleGrid minChildWidth="200px" spacing="40px">
+        {userAlbums.map((item: AlbumType) => {
           return <Album key={item.id} {...item} />;
         })}
-    </SimpleGrid>
+      </SimpleGrid>
+    </>
   );
 };
 export default UserPage;

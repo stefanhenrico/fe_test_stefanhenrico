@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { FC } from "react";
 import "@/assets/styles/globals.css";
 import StoreProvider from "../../providers/StoreProvider";
-import { ChakraProvider } from "@chakra-ui/react";
+import ThemeProvider from "../../providers/ThemeProvider";
+import SearchBar from "@/components/SearchBar/SearchBar";
 
 export const metadata: Metadata = {
   title: "Albums",
@@ -19,11 +20,11 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
     <StoreProvider>
       <html lang="en">
         <body>
-          <ChakraProvider>
+          <ThemeProvider>
             <section>
               <div>{children}</div>
             </section>
-          </ChakraProvider>
+          </ThemeProvider>
         </body>
       </html>
     </StoreProvider>
