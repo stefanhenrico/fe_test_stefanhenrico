@@ -1,6 +1,7 @@
 "use client";
 
 import AlbumList from "@/components/AlbumList/AlbumList";
+import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
 import Loader from "@/components/common/Loader/Loader";
 import UserCard from "@/components/UserCard/UserCard";
 import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
@@ -26,12 +27,16 @@ const UserPage: FC<UserPageProps> = ({ params }) => {
   const { albums, albumsError, albumsLoading, photosError, photosLoading } =
     useAlbumsWithThumbnails();
 
-  if (userLoading || albumsLoading || photosLoading) {
+  const isLoading = userLoading || albumsLoading || photosLoading;
+  const isError =
+    !userData || userError || !albums || albumsError || photosError;
+
+  if (isLoading) {
     return <Loader />;
   }
 
-  if (!userData || userError || !albums || albumsError || photosError) {
-    return <>error goes here</>;
+  if (isError) {
+    return <ErrorMessage />;
   }
 
   const userAlbums = albums.filter(

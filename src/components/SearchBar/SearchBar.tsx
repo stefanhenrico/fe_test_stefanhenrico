@@ -12,7 +12,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const SearchBar = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>("");
   const router = useRouter();
   const path = usePathname();
   const searchParams = useSearchParams();

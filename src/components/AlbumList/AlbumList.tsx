@@ -11,7 +11,7 @@ type AlbumListProps = {
   userId?: number;
 };
 
-const AlbumList: FC<AlbumListProps> = ({ albums, userId = null }) => {
+const AlbumList: FC<AlbumListProps> = ({ albums }) => {
   const router = useRouter();
 
   const handleAlbumClick = (userId: number) => {

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { FC } from "react";
-import "@/assets/styles/globals.css";
 import StoreProvider from "../../providers/StoreProvider";
 import ThemeProvider from "../../providers/ThemeProvider";
 import SearchBar from "@/components/SearchBar/SearchBar";

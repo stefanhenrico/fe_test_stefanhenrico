@@ -1,6 +1,7 @@
 "use client";
 
 import AlbumList from "@/components/AlbumList/AlbumList";
+import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
 import Loader from "@/components/common/Loader/Loader";
 import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
 import { AlbumType } from "@/types/album";
@@ -24,12 +25,15 @@ const SearchPage = () => {
   const searchQuery = searchParams.get("query") || "";
   const userId = searchParams.get("userId") || null;
 
-  if (albumsLoading || photosLoading) {
+  const isLoading = albumsLoading || photosLoading;
+  const isError = !albums || albumsError || photosError;
+
+  if (isLoading) {
     return <Loader />;
   }
 
-  if (!albums || albumsError || photosError) {
-    return <>error goes here</>;
+  if (isError) {
+    return <ErrorMessage />;
   }
 
   const filteredAlbums = albums

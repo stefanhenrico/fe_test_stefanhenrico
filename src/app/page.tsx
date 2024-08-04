@@ -4,17 +4,20 @@ import Loader from "@/components/common/Loader/Loader";
 import { Container } from "@chakra-ui/react";
 import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
 import AlbumList from "@/components/AlbumList/AlbumList";
+import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
 
 const HomePage = () => {
   const { albums, albumsError, albumsLoading, photosError, photosLoading } =
     useAlbumsWithThumbnails();
+  const isLoading = albumsLoading || photosLoading;
+  const isError = !albums || albumsError || photosError;
 
-  if (albumsLoading || photosLoading) {
+  if (isLoading) {
     return <Loader />;
   }
 
-  if (!albums || albumsError || photosError) {
-    return <>error goes here</>;
+  if (isError) {
+    return <ErrorMessage />;
   }
 
   return (
