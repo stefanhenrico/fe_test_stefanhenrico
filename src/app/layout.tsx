@@ -4,6 +4,7 @@ import "@/assets/styles/globals.css";
 import StoreProvider from "../../providers/StoreProvider";
 import ThemeProvider from "../../providers/ThemeProvider";
 import SearchBar from "@/components/SearchBar/SearchBar";
+import Navbar from "@/components/NavBar/NavBar";
 
 export const metadata: Metadata = {
   title: "Albums",
@@ -21,6 +22,8 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
       <html lang="en">
         <body>
           <ThemeProvider>
+            <Navbar />
+            <SearchBar />
             <section>
               <div>{children}</div>
             </section>

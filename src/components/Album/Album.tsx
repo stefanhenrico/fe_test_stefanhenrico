@@ -4,14 +4,15 @@ import { FC } from "react";
 import { Card, CardBody, Heading, Image, Stack } from "@chakra-ui/react";
 
 type AlbumProps = {
+  userId: number;
   title: string;
   thumbnailUrl?: string;
-  onClick?: () => void | undefined;
+  onClick: (userId: number) => void;
 };
 
-const Album: FC<AlbumProps> = ({ title, thumbnailUrl, onClick }) => {
+const Album: FC<AlbumProps> = ({ userId, title, thumbnailUrl, onClick }) => {
   return (
-    <Card maxW="sm" onClick={onClick} cursor={onClick ? "pointer" : "default"}>
+    <Card maxW="sm" onClick={() => onClick(userId)} cursor="pointer">
       <CardBody>
         <Image
           alt={title}

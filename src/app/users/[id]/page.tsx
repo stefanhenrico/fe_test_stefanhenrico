@@ -1,20 +1,20 @@
 "use client";
 
-import Album from "@/components/Album/Album";
+import AlbumList from "@/components/AlbumList/AlbumList";
 import Loader from "@/components/common/Loader/Loader";
+import UserCard from "@/components/UserCard/UserCard";
 import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
 import { useGetUserDetailsQuery } from "@/store/slices/userApliSlice";
-import { AlbumType } from "@/types/album";
-import {
-  Box,
-  Card,
-  CardBody,
-  Heading,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
+import { FC } from "react";
 
-const UserPage = ({ params }: { params: { id: string } }) => {
+type UserPageProps = {
+  params: {
+    id: string;
+  };
+};
+
+const UserPage: FC<UserPageProps> = ({ params }) => {
   const { id: userId } = params;
 
   const {
@@ -34,36 +34,15 @@ const UserPage = ({ params }: { params: { id: string } }) => {
     return <>error goes here</>;
   }
 
-  const { name, website, company, email, phone } = userData;
-  const { name: companyName, bs, catchPhrase } = company;
-  const userAlbums = albums.filter((album) => album.userId === userData.id);
+  const userAlbums = albums.filter(
+    (album) => album.userId === parseInt(userId)
+  );
 
   return (
-    <>
-      <Box>
-        <Card boxShadow="none">
-          <CardBody>
-            <Heading size="lg">{name}</Heading>
-
-            <Text fontSize="sm">{email}</Text>
-            <Text fontSize="sm">{phone}</Text>
-            <Text fontSize="sm">{website}</Text>
-
-            <Heading size="xs" mt={4} textTransform="uppercase">
-              Company details:
-            </Heading>
-            <Heading size="md">{companyName}</Heading>
-            <Text fontSize="sm">- {catchPhrase}</Text>
-            <Text fontSize="sm">- {bs}</Text>
-          </CardBody>
-        </Card>
-      </Box>
-      <SimpleGrid minChildWidth="200px" spacing="40px">
-        {userAlbums.map((item: AlbumType) => {
-          return <Album key={item.id} {...item} />;
-        })}
-      </SimpleGrid>
-    </>
+    <Container maxW="100%" p={4}>
+      <UserCard user={userData} />
+      <AlbumList albums={userAlbums} />
+    </Container>
   );
 };
 export default UserPage;

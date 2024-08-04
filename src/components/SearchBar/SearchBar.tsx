@@ -1,48 +1,78 @@
 "use client";
 
 import {
-  Button,
   Container,
   Input,
   InputGroup,
-  InputRightAddon,
+  InputLeftElement,
+  InputRightElement,
 } from "@chakra-ui/react";
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { CloseIcon, Search2Icon } from "@chakra-ui/icons";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type SearchBarProps = {
-  onSearch: (query: string) => void;
-};
-
-const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSearch(searchQuery);
-  };
+const SearchBar = () => {
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+  const path = usePathname();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId") || null;
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+    setQuery(e.target.value);
+  };
+
+  const handleClearSearch = () => {
+    setQuery("");
+  };
+
+  const handleOnSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    let searchStr = `/search/?query=${query}`;
+
+    const searchUserId = path.includes("users")
+      ? path.replace("/users/", "")
+      : userId;
+
+    if (searchUserId) {
+      searchStr += `&userId=${searchUserId}`;
+    }
+
+    router.push(searchStr);
+    setQuery("");
   };
 
   return (
-    <Container justifyContent="flex-start" maxW="100%" p={0} m={0} mb={4}>
-      <form onSubmit={handleSearch}>
+    <Container
+      justifyContent="flex-start"
+      maxW="100%"
+      p={0}
+      px={4}
+      m={0}
+      mt={4}
+    >
+      <form onSubmit={handleOnSearch}>
         <InputGroup width="100%">
+          <InputLeftElement pointerEvents="none">
+            <Search2Icon color="gray.600" />
+          </InputLeftElement>
           <Input
+            type="text"
             placeholder="Search..."
-            value={searchQuery}
+            value={query}
             width="100%"
             onChange={handleOnChange}
           />
-          <InputRightAddon width="4.5rem">
-            <Button size="md" type="submit">
-              Search
-            </Button>
-          </InputRightAddon>
+          {query && (
+            <InputRightElement onClick={handleClearSearch} cursor="pointer">
+              <CloseIcon color="gray.600" />
+            </InputRightElement>
+          )}
         </InputGroup>
       </form>
     </Container>
   );
 };
+
 export default SearchBar;
