@@ -107,6 +107,7 @@ const UserCard: FC<UserCardProps> = ({ user }) => {
                     maxLength={99}
                     textAlign="center"
                     borderColor={incorrect ? "red.500" : "gray.200"}
+                    data-testid="puzzle-answer"
                   />
                   <Text>?</Text>
                   <Button p={2} variant="solid" onClick={handleSolvePuzzle}>
