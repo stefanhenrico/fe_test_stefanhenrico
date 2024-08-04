@@ -1,6 +1,7 @@
 import { ALBUMS_URL, PHOTOS_URL } from "@/config/constants";
-import { apiSlice } from "./apiSlice";
 import { PhotoType } from "@/types/photo";
+
+import { apiSlice } from "./apiSlice";
 
 export const photosApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

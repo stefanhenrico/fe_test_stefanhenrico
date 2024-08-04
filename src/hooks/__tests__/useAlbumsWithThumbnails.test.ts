@@ -1,8 +1,9 @@
 import { renderHook } from "@testing-library/react";
-import { useGetAlbumsQuery } from "@/store/slices/albumApiSlice";
+
 import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
-import { AlbumType } from "@/types/album";
+import { useGetAlbumsQuery } from "@/store/slices/albumApiSlice";
 import { useGetPhotosQuery } from "@/store/slices/photosApiSlice";
+import { AlbumType } from "@/types/album";
 
 jest.mock("@/store/slices/albumApiSlice");
 jest.mock("@/store/slices/photosApiSlice");

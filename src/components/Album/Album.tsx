@@ -1,7 +1,7 @@
 "use client";
 
-import { FC } from "react";
 import { Card, CardBody, Heading, Image, Stack } from "@chakra-ui/react";
+import { FC } from "react";
 
 type AlbumProps = {
   userId: number;

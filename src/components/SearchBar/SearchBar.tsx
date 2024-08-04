@@ -1,5 +1,6 @@
 "use client";
 
+import { CloseIcon, Search2Icon } from "@chakra-ui/icons";
 import {
   Container,
   Input,
@@ -7,9 +8,8 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
-import { CloseIcon, Search2Icon } from "@chakra-ui/icons";
-import { ChangeEvent, FormEvent, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 const SearchBar = () => {
   const [query, setQuery] = useState<string>("");

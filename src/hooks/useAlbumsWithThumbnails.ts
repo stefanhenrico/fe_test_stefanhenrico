@@ -1,9 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { useGetAlbumsQuery } from "@/store/slices/albumApiSlice";
 import { useGetPhotosQuery } from "@/store/slices/photosApiSlice";
 import { AlbumType } from "@/types/album";
-import { useEffect, useState } from "react";
 
 const useAlbumsWithThumbnails = () => {
   const [albums, setAlbums] = useState<AlbumType[]>([]);

@@ -7,11 +7,6 @@ const theme = extendTheme({
         margin: "0",
         padding: "0",
       },
-      // a: {
-      //   _hover: {
-      //     cursor: "pointer",
-      //   },
-      // },
     }),
   },
 });

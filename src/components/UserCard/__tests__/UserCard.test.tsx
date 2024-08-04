@@ -1,9 +1,11 @@
+import { Store, UnknownAction } from "@reduxjs/toolkit";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore, { MockStoreEnhanced } from "redux-mock-store";
-import UserCard from "../UserCard";
+
 import { UserType } from "@/types/user";
-import { Store, UnknownAction } from "@reduxjs/toolkit";
+
+import UserCard from "../UserCard";
 
 const mockStore = configureStore([]);
 const user: UserType = {
@@ -32,7 +34,7 @@ const user: UserType = {
 
 describe("UserCard", () => {
   let store:
-    | MockStoreEnhanced<unknown, {}>
+    | MockStoreEnhanced<unknown, object>
     | Store<unknown, UnknownAction, unknown>;
 
   beforeEach(() => {
@@ -77,7 +79,7 @@ describe("UserCard", () => {
     });
     fireEvent.click(screen.getByText("Submit"));
 
-    const actions = (store as MockStoreEnhanced<unknown, {}>).getActions();
+    const actions = (store as MockStoreEnhanced<unknown, object>).getActions();
 
     expect(actions).toContainEqual({
       type: "global/setGlobal",
@@ -94,7 +96,7 @@ describe("UserCard", () => {
     });
     fireEvent.click(screen.getByText("Submit"));
 
-    const actions = (store as MockStoreEnhanced<unknown, {}>).getActions();
+    const actions = (store as MockStoreEnhanced<unknown, object>).getActions();
 
     expect(actions).toContainEqual({
       type: "global/setGlobal",

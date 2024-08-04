@@ -1,10 +1,12 @@
 "use client";
 
-import { AlbumType } from "@/types/album";
 import { SimpleGrid } from "@chakra-ui/react";
-import { FC } from "react";
-import Album from "../Album/Album";
 import { useRouter } from "next/navigation";
+import { FC } from "react";
+
+import { AlbumType } from "@/types/album";
+
+import Album from "../Album/Album";
 
 type AlbumListProps = {
   albums: AlbumType[];

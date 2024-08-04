@@ -1,10 +1,5 @@
 "use client";
 
-import AlbumList from "@/components/AlbumList/AlbumList";
-import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
-import Loader from "@/components/common/Loader/Loader";
-import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
-import { AlbumType } from "@/types/album";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -15,6 +10,12 @@ import {
   TagLabel,
 } from "@chakra-ui/react";
 import { useRouter, useSearchParams } from "next/navigation";
+
+import AlbumList from "@/components/AlbumList/AlbumList";
+import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
+import Loader from "@/components/common/Loader/Loader";
+import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
+import { AlbumType } from "@/types/album";
 
 const SearchPage = () => {
   const router = useRouter();

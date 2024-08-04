@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { FC } from "react";
+
+import Navbar from "@/components/NavBar/NavBar";
+import SearchBar from "@/components/SearchBar/SearchBar";
+
 import StoreProvider from "../../providers/StoreProvider";
 import ThemeProvider from "../../providers/ThemeProvider";
-import SearchBar from "@/components/SearchBar/SearchBar";
-import Navbar from "@/components/NavBar/NavBar";
 
 export const metadata: Metadata = {
   title: "Albums",

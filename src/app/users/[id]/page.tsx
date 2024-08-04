@@ -1,13 +1,14 @@
 "use client";
 
+import { Container } from "@chakra-ui/react";
+import { FC } from "react";
+
 import AlbumList from "@/components/AlbumList/AlbumList";
 import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
 import Loader from "@/components/common/Loader/Loader";
 import UserCard from "@/components/UserCard/UserCard";
 import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
 import { useGetUserDetailsQuery } from "@/store/slices/userApliSlice";
-import { Container } from "@chakra-ui/react";
-import { FC } from "react";
 
 type UserPageProps = {
   params: {

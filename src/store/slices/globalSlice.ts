@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
 
+// TODO - fix any type
 const updateLocalStorage = (state: any) => {
   localStorage.setItem("global", JSON.stringify(state));
 };

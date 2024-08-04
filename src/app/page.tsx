@@ -1,10 +1,11 @@
 "use client";
 
-import Loader from "@/components/common/Loader/Loader";
 import { Container } from "@chakra-ui/react";
-import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
+
 import AlbumList from "@/components/AlbumList/AlbumList";
 import ErrorMessage from "@/components/common/ErrorMessage/ErrorMessage";
+import Loader from "@/components/common/Loader/Loader";
+import useAlbumsWithThumbnails from "@/hooks/useAlbumsWithThumbnails";
 
 const HomePage = () => {
   const { albums, albumsError, albumsLoading, photosError, photosLoading } =

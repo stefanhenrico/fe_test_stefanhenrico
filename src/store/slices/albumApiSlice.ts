@@ -1,6 +1,7 @@
 import { ALBUMS_URL } from "@/config/constants";
-import { apiSlice } from "./apiSlice";
 import { AlbumType } from "@/types/album";
+
+import { apiSlice } from "./apiSlice";
 
 export const albumsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

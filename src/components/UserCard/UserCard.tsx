@@ -1,10 +1,3 @@
-import { useAppDispatch, useAppSelector } from "@/store/hooks/useStoreHooks";
-import { setGlobal } from "@/store/slices/globalSlice";
-import { UserType } from "@/types/user";
-import {
-  partiallyHideEmail,
-  partiallyHidePhoneNumber,
-} from "@/utils/contactDetails";
 import {
   Box,
   Button,
@@ -18,6 +11,14 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { ChangeEvent, FC, useState } from "react";
+
+import { useAppDispatch, useAppSelector } from "@/store/hooks/useStoreHooks";
+import { setGlobal } from "@/store/slices/globalSlice";
+import { UserType } from "@/types/user";
+import {
+  partiallyHideEmail,
+  partiallyHidePhoneNumber,
+} from "@/utils/contactDetails";
 
 type UserCardProps = {
   user: UserType;
