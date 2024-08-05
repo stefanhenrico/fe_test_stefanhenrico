@@ -1,6 +1,8 @@
 "use client";
 
-import { Container } from "@chakra-ui/react";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { Button, Container } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 import AlbumList from "@/components/AlbumList/AlbumList";
@@ -17,6 +19,7 @@ type UserPageProps = {
 };
 
 const UserPage: FC<UserPageProps> = ({ params }) => {
+  const router = useRouter();
   const { id: userId } = params;
 
   const {
@@ -44,8 +47,21 @@ const UserPage: FC<UserPageProps> = ({ params }) => {
     (album) => album.userId === parseInt(userId)
   );
 
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
     <Container maxW="100%" p={4}>
+      <Button
+        leftIcon={<ArrowBackIcon />}
+        onClick={handleBack}
+        colorScheme="gray"
+        variant="solid"
+        mb={4}
+      >
+        Back
+      </Button>
       <UserCard user={userData} />
       <AlbumList albums={userAlbums} />
     </Container>
